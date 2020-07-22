@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "maps-openlayers"
+    }
+  },
+  "defaultProject": "maps-openlayers",
+  "cli": {
+    "analytics": "b8f43fb1-1e7d-40fb-8d78-2e603c4b576d"
+  }
 }
