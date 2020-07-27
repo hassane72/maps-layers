@@ -45,11 +45,13 @@ export class AppComponent implements OnInit{
     this.untiled = new ImageLayer({
       source: new ImageWMS({
         ratio: 1,
-        url: 'http://192.168.1.160:8080/geoserver/Demo/wms',
+        url: 'http://196.207.207.118:8081/geoserver/Demo/wms',
+        //url: 'http://localhost:8081/geoserver/Demo/wms',
         params: {'FORMAT': 'image/png',
           'VERSION': '1.1.1',
           "LAYERS": 'Demo:parcelle',
-          "exceptions": 'application/vnd.ogc.se_inimage',
+          //"LAYERS": 'Demo:admin_sn',
+          "exceptions": 'application/vnd.ogc.se_inimage'
         }
       })
     });
@@ -57,31 +59,24 @@ export class AppComponent implements OnInit{
     this.tiled = new TileLayer({
       visible: false,
       source: new TileWMS({
-        url: 'http://192.168.1.160:8080/geoserver/Demo/wms',
+        url: 'http://196.207.207.118:8081/geoserver/Demo/wms',
+      //  url: 'http://localhost:8081/geoserver/Demo/wms',
         params: {'FORMAT': 'image/png',
           'VERSION': '1.1.1',
           tiled: true,
+          //"LAYERS": 'Demo:admin_sn',
           "LAYERS": 'Demo:parcelle',
-          "exceptions": 'application/vnd.ogc.se_inimage',
-          tilesOrigin: 231781.4375 + ',' + 1591072.25
+          "exceptions": 'application/vnd.ogc.se_inimage'
+          //tilesOrigin: -17.5431861877441 + ',' + 12.3078594207764
         }
+
       })
     });
 
-    var untiled1 = new ImageLayer({
-      source: new ImageWMS({
-        ratio: 1,
-        url: 'http://192.168.1.160:8080/geoserver/Demo/wms',
-        params: {'FORMAT': 'image/png',
-          'VERSION': '1.1.1',
-          "LAYERS": 'Demo:commune',
-          "exceptions": 'application/vnd.ogc.se_inimage',
-        }
-      })
-    });
 
     this.view =  new View({
       center: olProj.fromLonLat([-19.0140526, 14.4362166]),
+      //center: olProj.fromLonLat([0, 0]),
       zoom: 6
     });
 
@@ -127,12 +122,12 @@ export class AppComponent implements OnInit{
   sendRequest(url){
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST',
-        'Content-Type': 'application/json',
+     //   'Access-Control-Allow-Origin': '*',
+      //  'Access-Control-Allow-Methods': 'GET,POST',
+       'Content-Type': 'application/json',
       })
     };
-    this.http.get(url, httpOptions).subscribe((res) => console.log(res));
+    this.http.get(url).subscribe((res) => console.log(res));
 
   }
 }
